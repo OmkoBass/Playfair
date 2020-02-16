@@ -68,9 +68,6 @@ def split_even(word, n):
     for val in chunks(word, 2):
         words.extend(val)
 
-    if words.__contains__(' '):
-        words.remove(' ')
-
     if len(words) % 2 == 1:
         words.extend('X')
 
@@ -80,17 +77,21 @@ def chunks(list, n):
     for i in range(0, len(list), n):
         yield list[i:i + n]
 
+def fix_word_key(val):
+    val = val.upper()
+    val = val.replace('J', 'I')
+    val = val.replace(' ', '')
+
+    return val
+
 alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L',
 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 word = input('Enter the word you want to cipher: ')
-word = word.upper()
+word = fix_word_key(word)
 
 key = input('Enter your key: ')
-key = key.upper()
-key = key.replace(' ', '')
-
-print(key)
+key = fix_word_key(key)
 
 #Removed the duplicates but preserves the order
 distinct = []
